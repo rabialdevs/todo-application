@@ -17,6 +17,11 @@ const Page = () => {
     // console.log(task);
     try {
       const result = await addTask(task);
+      setTask({
+        title: '',
+        content: '',
+        status: ''
+      })
       // console.log(result);
       toast.success('Task added successfully')
     } catch (error) {
