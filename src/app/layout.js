@@ -2,7 +2,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import CustomNavbar from "@/components/CustomNavbar";
 import Footer from "@/components/Footer";
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: [ "latin" ] });
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -14,12 +16,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`flex flex-col w-screen h-screen  ${inter.className}`}>
         <div className="flex flex-none  w-full">
+          <ToastContainer />
           <CustomNavbar />
         </div>
         <div className="grow h-full">{children}</div>
-        <div className="w-full ">
-          <Footer />
-        </div>
+        <div className="w-full ">{/* <Footer /> */}</div>
       </body>
     </html>
   );

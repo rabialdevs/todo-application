@@ -23,7 +23,7 @@ export async function POST(request) {
       message: "Task saved successfully",
     });
   } catch (error) {
-    return NextResponse.json({ message: error.message });
+    return NextResponse.json({ message:'User Not Created !!' });
   }
 }
 

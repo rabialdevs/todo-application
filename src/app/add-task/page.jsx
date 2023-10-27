@@ -1,27 +1,31 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import axios from "axios";
-// export const metadata = {
-//   title: "Add Task : Work Manager",
-// };
+import { addTask } from "@/service/taskService";
+import { toast } from "react-toastify";
+
 const Page = () => {
-
-  const [ task, setTask ] = useState({
-    title:'',
-    content:'',
-    status:'',
-    userId:''
-  })
-  function handelSubmit(event) {
+  const [task, setTask] = useState({
+    title: "",
+    content: "",
+    status: "",
+    userId: "6532d208c2d0f9f25ea05fab",
+  });
+  async function handelSubmit(event) {
+    
     event.preventDefault();
-    console.log(task);
-
+    // console.log(task);
+    try {
+      const result = await addTask(task);
+      // console.log(result);
+      toast.success('Task added successfully')
+    } catch (error) {
+      toast.error('Task added failed !')
+    }
   }
-
   return (
     <div className="flex justify-center bg-slate-200 h-full p-6">
-      <div className="w-[50%] bg-neutral-300  my-4 px-4 py-4 rounded-xl flex   flex-col gap-4 ">
+      <div className="w-[40%] bg-neutral-300  my-4 px-4 py-4 rounded-xl flex   flex-col gap-4 ">
         <div className="flex items-center justify-center">
           <Image src="/todo.svg" width={180} height={100} alt="Todo" />
         </div>
@@ -31,7 +35,7 @@ const Page = () => {
         <form
           action=""
           className="flex flex-col justify-between gap-2 h-full text-black"
-          onSubmit={handelSubmit}
+          
         >
           <label htmlFor="task_title">Title : -</label>
           <input
@@ -65,10 +69,16 @@ const Page = () => {
             </select>
           </div>
           <div className=" flex justify-center items-center gap-4 mb-2 mt-auto">
-            <button className="px-4 py-2 rounded-xl bg-blue-400 hover:bg-blue-600 ">
+            <button
+              className="px-4 py-2 rounded-xl bg-blue-400 hover:bg-blue-600 "
+              onClick={handelSubmit}
+            >
               Add
             </button>
-            <button className="px-4 py-2 rounded-xl bg-red-400 hover:bg-red-600 ">
+            <button
+              className="px-4 py-2 rounded-xl bg-red-400 hover:bg-red-600 "
+              onClick={() => setTask({})}
+            >
               Clear
             </button>
           </div>

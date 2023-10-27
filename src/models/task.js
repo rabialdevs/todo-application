@@ -20,7 +20,7 @@ const TaskSchema = new Schema({
     default: 'pending'
   },
   userId: {
-    type: mongoose.ObjectId,
+    type: mongoose.Schema.ObjectId,
     require:true,
   }
   
